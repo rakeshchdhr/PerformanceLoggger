@@ -12,16 +12,16 @@ namespace PerformanceLogger
         /// <summary>
         /// Logs the time taken for particular operation
         /// </summary>
-        /// <typeparam name="T">Method Result</typeparam>
-        /// <param name="type">Logger Type (use GetType())</param>
-        /// <param name="methodName">Method Name</param>
-        /// <param name="method">Method to log</param>
+        /// <typeparam name="T">Operation Result</typeparam>
+        /// <param name="type">Logger Instance (use GetType())</param>
+        /// <param name="operationName">Operation Name</param>
+        /// <param name="operation">operation to log</param>
         /// <returns></returns>
-        public T Log<T>(Type type, string methodName, Func<T> method)
+        public T Log<T>(Type type, string operationName, Func<T> operation)
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            var result = method();
+            var result = operation();
             stopwatch.Stop();
 
             return result;
@@ -30,16 +30,16 @@ namespace PerformanceLogger
         /// <summary>
         /// Asynchronously logs the time taken for particular operation
         /// </summary>
-        /// <typeparam name="T">Method Result</typeparam>
-        /// <param name="type">Logger Type (use GetType())</param>
-        /// <param name="methodName">Method Name</param>
-        /// <param name="method">Method to log</param>
+        /// <typeparam name="T">Operation Result</typeparam>
+        /// <param name="type">Logger Instance (use GetType())</param>
+        /// <param name="operationName">Operation Name</param>
+        /// <param name="operation">Operation to log</param>
         /// <returns></returns>
-        public async Task<T> LogAsync<T>(Type type, string methodName, Func<Task<T>> method)
+        public async Task<T> LogAsync<T>(Type type, string operationName, Func<Task<T>> operation)
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            var result = await method();
+            var result = await operation();
             stopwatch.Stop();
 
             return result;
